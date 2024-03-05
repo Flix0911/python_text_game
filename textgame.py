@@ -27,11 +27,11 @@ class Character:
 
     # define the constructor / function that makes a character
     # arg of self and the name
-    def __ini__(self, name):
+    def __init__(self, name):
         # define your name
         self.name = name
         # define hp between 1-20
-        self.hp = random.randint(1, 20)
+        self.hp = random.randint(10, 20)
         # random str between 4-8
         self.strength = random.randint(4, 8)
         # random def between 1-4
@@ -48,10 +48,10 @@ class Character:
             # how much hp is reduced by the damage
             other.hp -= damage
             # print response for damage done and how much hp is left
-            print(f"${self.name} hit ${other.name} for ${damage} damage, they have ${other.hp} left!")
+            print(f"{self.name} hit {other.name} for {damage} damage, they have {other.hp} left!")
         else:
             # print response for failing an attack
-            print(f"${self.name} fails to attack ${other.name}")
+            print(f"{self.name} fails to attack {other.name}")
 
 
 # FUNCTIONS
@@ -65,24 +65,42 @@ def win_conditions(self, other):
         return True
     if (other.hp < 1):
     # if other's hp is less than 1, you win
-        print(f"${other.name} has died, you win!")
+        print(f"{other.name} has died, you win!")
+        return True
         # if false, game is over
-        return False
+    return False
     
 # game set up
     
-    # ask for the players name
-    player_name = input("What is your name?")
-
-    # player_name is now the Character name
-    player = Character(player_name)
-
-    # other character
-    goblin = Character("Goblin")
+# ask for the players name
+player_name = input("What is your name?")
+# player_name is now the Character name
+player = Character(player_name)
+# other character
+goblin = Character("Goblin")
 
 # GAME LOOP
 
 # infinite loop - running forever
-while(true):
+while(True):
     # your text input
-    input("Do you want to [f]ight, [d]efend, or [q]uit")
+    choice = input("Do you want to [f]ight, [d]efend, or [q]uit")
+
+    # take the choice for fight
+    if (choice == "f"):
+        player.attack(goblin)
+        goblin.attack(player)
+    # take the choice for defend
+    if (choice == "d"):
+        # if chosen, increased defense by 2
+        player.defense += 2
+        goblin.attack(player)
+        # if chosen, decrease defense by 2
+        player.defense -= 2
+    # take the choice for quit 
+    if (choice == "q"):
+        print("Game over")
+        break
+    # check win condition
+    if (win_conditions(player, goblin)):
+        break
