@@ -5,6 +5,19 @@ import random
 
 # GAME STATE
 
+# game dictionary
+game_state = {
+    "gold": 0,
+    "location": "arena"
+}
+
+# location dictionary
+location = {
+    "arena": {
+        "barracks": "arena",
+        "training ground": "arena"
+    }
+}
 
 # CHARACTER CLASS
 class Character:
