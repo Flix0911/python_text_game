@@ -13,8 +13,11 @@ game_state = {
 
 # location dictionary
 location = {
+    # where can you go from arena:
     "arena": {
+        # can go from barracks back to arena
         "barracks": "arena",
+        # can go from training ground back to arena
         "training ground": "arena"
     }
 }
@@ -53,9 +56,33 @@ class Character:
 
 # FUNCTIONS
 
+# win condition - function - 2 args of self and other
+def win_conditions(self, other):
+    # if your hp is less than 1, you lose
+    if (self.hp < 1):
+        print("You have died, you lose!")
+        # if True, game is over
+        return True
+    if (other.hp < 1):
+    # if other's hp is less than 1, you win
+        print(f"${other.name} has died, you win!")
+        # if false, game is over
+        return False
+    
+# game set up
+    
+    # ask for the players name
+    player_name = input("What is your name?")
+
+    # player_name is now the Character name
+    player = Character(player_name)
+
+    # other character
+    goblin = Character("Goblin")
 
 # GAME LOOP
 
 # infinite loop - running forever
 while(true):
-    pass
+    # your text input
+    input("Do you want to [f]ight, [d]efend, or [q]uit")
